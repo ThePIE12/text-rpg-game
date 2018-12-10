@@ -1,0 +1,26 @@
+{
+  "name": "text-rpg-game",
+  "version": "0.0.1",
+  "description": "A text RPG game",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "github:user/repo",
+  "keywords": [
+    "Electron",
+    "RPG",
+	"TextRPG",
+	"WIP"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^3.0.7"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {}
+}
