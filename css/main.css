@@ -32,15 +32,11 @@ body {
   margin-right: auto;
   width: 50%;
 }
-p {
-  margin-top: 10px;
-}
 .grey{
   color: rgba(150, 150, 150);
 }
 #main {
-  background: url("file:///img/scanlines.png");
-  background-size: 150px;
+  background: black;
   height: calc(100% - 32px);
   margin-top: 32px;
   padding: 20px;
