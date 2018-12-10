@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "github:user/repo",
+  "repository": "github:ThePIE12/text-rpg-game",
   "keywords": [
     "Electron",
     "RPG",
