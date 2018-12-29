@@ -19,7 +19,7 @@ Element.prototype.remove = function() {
 NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
   console.log("Element deleted!")
   console.log(this)
-  for(var i = this.length - 1; i >= 0; i--) {
+  for(let i = this.length - 1; i >= 0; i--) {
     if(this[i] && this[i].parentElement) {
       this[i].parentElement.removeChild(this[i])
     }
