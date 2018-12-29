@@ -4,10 +4,13 @@
 const remote = require('electron').remote
 const fs = require('fs')
 const path = require('path')
+const $ = jquery = require("./js/jquery-3.3.1.min.js")
 
 document.onreadystatechange = () => {
     if (document.readyState == 'complete') {
       handleWindowControls()
+      InitButtons()
+      InitShell()
     }
 }
 
@@ -49,13 +52,21 @@ function Sleep (milliseconds) {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
+function InitButtons() {
+
+}
+
+function InitShell() {
+  
+}
+
 function handleWindowControls() {
   // When document has loaded, initialise
   let window = remote.getCurrentWindow()
   const minButton = document.getElementById('min-button'),
         maxButton = document.getElementById('max-button'),
         restoreButton = document.getElementById('restore-button'),
-        closeButton = document.getElementById('close-button');
+        closeButton = document.getElementById('close-button')
 
   minButton.addEventListener('click', event => {
     window = remote.getCurrentWindow()

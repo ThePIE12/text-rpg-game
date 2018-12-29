@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <title>The Text RPG Game</title>
     <link rel="stylesheet" href="./css/main.css">
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js">
+
+    </script>
     <script>
       require('./renderer.js')
     </script>
@@ -34,7 +37,10 @@
     </header>
 
     <div id="main">
-      <textarea></textarea>
+      <div id="Shell">
+        <textarea id="OutputShell"></textarea>
+        <p id="TextBeforeInputShell">&gt;a</p><input id="InputShell" type="text">
+      </div>
     </div>
   </body>
 </html>
