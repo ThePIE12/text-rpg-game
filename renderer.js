@@ -139,7 +139,7 @@ function ShellParseKeyInput (e) {
     if (PrevCommands[CurrentIndex - 1].trim() == '')
       PrevCommands.pop()
 
-    CurrentMessage = ''
+    CurrentCommand = ''
 
     OutputShell.value += `${InputShell.value}\n`
     InputShell.value = ''
@@ -147,7 +147,7 @@ function ShellParseKeyInput (e) {
 
   } else if (e.key == 'ArrowUp') {
     if (CurrentIndex == PrevCommands.length)
-      CurrentMessage = InputShell.value
+      CurrentCommand = InputShell.value
     if (CurrentIndex > 0)
       CurrentIndex--
     if (typeof PrevCommands[CurrentIndex] === "string")
@@ -160,6 +160,6 @@ function ShellParseKeyInput (e) {
     if (typeof PrevCommands[CurrentIndex] === "string")
       InputShell.value = PrevCommands[CurrentIndex]
     else if (CurrentIndex == PrevCommands.length)
-      InputShell.value = CurrentMessage
+      InputShell.value = CurrentCommand
   }
 }
