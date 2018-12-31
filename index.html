@@ -9,9 +9,6 @@
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js">
 
     </script>
-    <script>
-      require('./renderer.js')
-    </script>
   </head>
   <body>
     <header id="titlebar">
@@ -38,9 +35,16 @@
 
     <div id="main">
       <div id="Shell">
-        <textarea id="OutputShell"></textarea>
-        <p id="TextBeforeInputShell">&gt;a</p><input id="InputShell" type="text">
+        <textarea readonly id="OutputShell"></textarea>
+        <div id="InputShell">
+          <p>&gt;</p>
+          <input type="text">
+        </div>
       </div>
     </div>
+    
+    <script>
+      require('./renderer.js')
+    </script>
   </body>
 </html>

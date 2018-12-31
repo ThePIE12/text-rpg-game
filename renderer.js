@@ -57,7 +57,17 @@ function InitButtons() {
 }
 
 function InitShell() {
-  
+  let InputShell = document.getElementById('InputShell')
+  for (let i = 0; i < InputShell.length; i++) {
+    if (InputShell[i].tagName == 'INPUT') {
+      InputShell = InputShell[i]
+      break
+    }
+  }
+
+  InputShell.addEventListener('keydown', e => {
+    ShellParseKeyInput(e)
+  })
 }
 
 function handleWindowControls() {
@@ -105,5 +115,44 @@ function handleWindowControls() {
       restoreButton.style.display = 'none'
       maxButton.style.display = 'flex'
     }
+  }
+}
+
+
+var CurrentCommand = ''
+var PrevCommands = []
+var CurrentIndex = 0
+function ShellParseKeyInput (e) {
+  let InputShell = document.getElementById('InputShell').childNodes,
+      OutputShell = document.getElementById('OutputShell')
+  for (let i = 0; i < InputShell.length; i++) {
+    if (InputShell[i].tagName == 'INPUT') {
+      InputShell = InputShell[i]
+      break
+    }
+  }
+
+
+  if (e.key == 'Enter') {
+    PrevCommands = [...PrevCommands, InputShell.value]
+    CurrentIndex = PrevCommands.length
+
+    console.log(PrevCommands)
+    CurrentMessage = ''
+
+    OutputShell.value += `${InputShell.value}\n`
+    InputShell.value = ''
+
+
+  } else if (e.key == 'ArrowUp') {
+    if (CurrentIndex == PrevCommands.length) CurrentMessage = InputShell.value
+    if (CurrentIndex > 0) CurrentIndex--
+    if (typeof PrevCommands[CurrentIndex] === "string") InputShell.value = PrevCommands[CurrentIndex]
+
+
+  } else if (e.key == 'ArrowDown') {
+    if (CurrentIndex < PrevCommands.length) CurrentIndex++
+    if (typeof PrevCommands[CurrentIndex] === "string") InputShell.value = PrevCommands[CurrentIndex]
+    else if (CurrentIndex == PrevCommands.length) InputShell.value = CurrentMessage
   }
 }
