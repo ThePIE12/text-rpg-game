@@ -136,8 +136,9 @@ function ShellParseKeyInput (e) {
   if (e.key == 'Enter') {
     PrevCommands = [...PrevCommands, InputShell.value]
     CurrentIndex = PrevCommands.length
+    if (PrevCommands[CurrentIndex - 1].trim() == '')
+      PrevCommands.pop()
 
-    console.log(PrevCommands)
     CurrentMessage = ''
 
     OutputShell.value += `${InputShell.value}\n`
@@ -145,14 +146,20 @@ function ShellParseKeyInput (e) {
 
 
   } else if (e.key == 'ArrowUp') {
-    if (CurrentIndex == PrevCommands.length) CurrentMessage = InputShell.value
-    if (CurrentIndex > 0) CurrentIndex--
-    if (typeof PrevCommands[CurrentIndex] === "string") InputShell.value = PrevCommands[CurrentIndex]
+    if (CurrentIndex == PrevCommands.length)
+      CurrentMessage = InputShell.value
+    if (CurrentIndex > 0)
+      CurrentIndex--
+    if (typeof PrevCommands[CurrentIndex] === "string")
+      InputShell.value = PrevCommands[CurrentIndex]
 
 
   } else if (e.key == 'ArrowDown') {
-    if (CurrentIndex < PrevCommands.length) CurrentIndex++
-    if (typeof PrevCommands[CurrentIndex] === "string") InputShell.value = PrevCommands[CurrentIndex]
-    else if (CurrentIndex == PrevCommands.length) InputShell.value = CurrentMessage
+    if (CurrentIndex < PrevCommands.length)
+      CurrentIndex++
+    if (typeof PrevCommands[CurrentIndex] === "string")
+      InputShell.value = PrevCommands[CurrentIndex]
+    else if (CurrentIndex == PrevCommands.length)
+      InputShell.value = CurrentMessage
   }
 }
