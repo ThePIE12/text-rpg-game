@@ -4,7 +4,7 @@
 const remote = require('electron').remote
 const fs = require('fs')
 const path = require('path')
-const $ = jquery = require("./js/jquery-3.3.1.min.js")
+const $ = jquery = require('./js/jquery-3.3.1.min.js')
 
 document.onreadystatechange = () => {
     if (document.readyState == 'complete') {
@@ -15,12 +15,12 @@ document.onreadystatechange = () => {
 }
 
 Element.prototype.remove = function() {
-  console.log("Element deleted!")
+  console.log('Element deleted!')
   console.log(this)
   this.parentElement.removeChild(this)
 }
 NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-  console.log("Element deleted!")
+  console.log('Element deleted!')
   console.log(this)
   for(let i = this.length - 1; i >= 0; i--) {
     if(this[i] && this[i].parentElement) {
@@ -141,25 +141,35 @@ function ShellParseKeyInput (e) {
 
     CurrentCommand = ''
 
-    OutputShell.value += `${InputShell.value}\n`
+    parseCommand(InputShell.value)
     InputShell.value = ''
-
 
   } else if (e.key == 'ArrowUp') {
     if (CurrentIndex == PrevCommands.length)
       CurrentCommand = InputShell.value
     if (CurrentIndex > 0)
       CurrentIndex--
-    if (typeof PrevCommands[CurrentIndex] === "string")
+    if (typeof PrevCommands[CurrentIndex] === 'string')
       InputShell.value = PrevCommands[CurrentIndex]
-
 
   } else if (e.key == 'ArrowDown') {
     if (CurrentIndex < PrevCommands.length)
       CurrentIndex++
-    if (typeof PrevCommands[CurrentIndex] === "string")
+    if (typeof PrevCommands[CurrentIndex] === 'string')
       InputShell.value = PrevCommands[CurrentIndex]
     else if (CurrentIndex == PrevCommands.length)
       InputShell.value = CurrentCommand
+  }
+}
+
+function parseCommand(command) {
+  let OutputShell = document.getElementById('OutputShell')
+  OutputShell.value += `\n> ${command}`
+  command = command.toLowerCase().split(' ')
+
+  switch (command[0]) {
+    case 'hello':
+      OutputShell.value += '\nWorld!'
+      break
   }
 }

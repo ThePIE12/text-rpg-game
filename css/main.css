@@ -130,7 +130,8 @@ body {
   resize: none;
   color: #ccc;
   position: absolute;
-  width: inherit;
+  left: 1em;
+  width: calc(100% - 1em);
   height: calc(100% - 2em);
 }
 
