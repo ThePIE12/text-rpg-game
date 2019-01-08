@@ -4,7 +4,8 @@
 const remote = require('electron').remote
 const fs = require('fs')
 const path = require('path')
-const $ = jquery = require('./js/jquery-3.3.1.min.js')
+const psID = '#OutputShell'
+const ps = new PerfectScrollbar(psID)
 
 document.onreadystatechange = () => {
     if (document.readyState == 'complete') {
@@ -27,6 +28,16 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
       this[i].parentElement.removeChild(this[i])
     }
   }
+}
+
+function scrollToBottom(selector) {
+  $(selector).scrollTop($(selector)[0].scrollHeight)
+  if (selector != psID) ps.update()
+}
+
+function appendText(id, text) { // To textarea
+  let box = $(id);
+  box.val(box.val() + text);
 }
 
 function animate({duration, draw, timing}) {
@@ -163,13 +174,21 @@ function ShellParseKeyInput (e) {
 }
 
 function parseCommand(command) {
-  let OutputShell = document.getElementById('OutputShell')
-  OutputShell.value += `\n> ${command}`
-  command = command.toLowerCase().split(' ')
+  appendText('#OutputShell', `\n> ${command}`)
+  command = command.toLowerCase()
 
-  switch (command[0]) {
-    case 'hello':
-      OutputShell.value += '\nWorld!'
+  switch (true) {
+    case /^(hello)[!?.,]*$/.test(command):
+      appendText('#OutputShell', '\nWorld!')
       break
   }
+
+  scrollToBottom('#OutputShell')
 }
+
+// Do stuff code
+$("#OutputShell").change(() => {
+  scrollToBottom('#OutputShell')
+})
+
+console.log('Hello')
