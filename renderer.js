@@ -178,9 +178,10 @@ function parseCommand(command) {
   command = command.toLowerCase()
 
   switch (true) {
-    case /^(hello)[!?.,]*$/.test(command):
+    case /^(hello)[!?.,]*$/.test(command): {
       appendText('#OutputShell', '\nWorld!')
       break
+    }
   }
 
   scrollToBottom('#OutputShell')
@@ -190,5 +191,3 @@ function parseCommand(command) {
 $("#OutputShell").change(() => {
   scrollToBottom('#OutputShell')
 })
-
-console.log('Hello')

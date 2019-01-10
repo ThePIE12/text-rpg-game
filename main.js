@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const electron = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const fs = require('fs')
 const path = require('path')
 
@@ -8,22 +9,70 @@ const path = require('path')
 let mainWindow
 let devtools
 
+if (process.platform === 'darwin') {
+  let template = [{
+    label: 'FromScratch',
+    submenu: [{
+      label: 'Quit',
+      accelerator: 'CmdOrCtrl+Q',
+      click: () => {
+        app.quit();
+      }
+    }]
+  }, {
+    label: 'Edit',
+    submenu: [{
+      label: 'Undo',
+      accelerator: 'CmdOrCtrl+Z',
+      selector: 'undo:'
+    }, {
+      label: 'Redo',
+      accelerator: 'Shift+CmdOrCtrl+Z',
+      selector: 'redo:'
+    }, {
+      type: 'separator'
+    }, {
+      label: 'Cut',
+      accelerator: 'CmdOrCtrl+X',
+      selector: 'cut:'
+    }, {
+      label: 'Copy',
+      accelerator: 'CmdOrCtrl+C',
+      selector: 'copy:'
+    }, {
+      label: 'Paste',
+      accelerator: 'CmdOrCtrl+V',
+      selector: 'paste:'
+    }, {
+      label: 'Select All',
+      accelerator: 'CmdOrCtrl+A',
+      selector: 'selectAll:'
+    }]
+  }]
+
+  let osxMenu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(osxMenu);
+}
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     show: false,
-    frame: false
+    frame: false,
+    icon: 'assets/media/icons/Icon_64x64.png'
   })
   mainWindow.setMenu(null)
 
   devtools = new BrowserWindow({
     show: false
   })
+
   mainWindow.webContents.setDevToolsWebContents(devtools.webContents)
   mainWindow.webContents.openDevTools({ mode: 'detach' })
 
   mainWindow.once('ready-to-show', function () {
     devtools.show()
+    mainWindow.maximize()
     mainWindow.show()
   })
 
